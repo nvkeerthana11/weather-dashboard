@@ -90,7 +90,7 @@ const Info = ({ search, trigger, image, cityName }) => {
     } else {
         desc = "no data";
     }
-    console.log(city.weather.code)
+
 
     var icon = "";
 
