@@ -1,0 +1,13 @@
+.graph{
+    width:800px;
+   margin-top:50px;
+    height:900px;
+    margin-left:100px;
+}
+.graphs{
+    width:1100px;
+    height:550px;
+    margin:120px 0 0 0px;
+    background-color:white;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+}

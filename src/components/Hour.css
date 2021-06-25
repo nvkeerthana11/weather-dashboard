@@ -1,0 +1,47 @@
+.hlist,.hl,.td{
+     
+    overflow-x: hidden;
+    white-space: nowrap;
+    display: inline;
+   /* background-color: deepskyblue;
+    width:54px;
+    height:50px; */
+ }
+ .date-box,.temp-box,.icon-box{
+     
+    margin-left:10px;
+ }
+ .td{
+    
+     margin-right:70px;
+     align-items: center;
+ }
+ .hlist{
+
+    margin-right:60px; 
+    
+ }
+ .hl{  
+    margin-right: 54px;
+    
+ }
+
+ .scontainer{
+   margin-left: 100px;
+  width:600px;
+ }
+ .img{
+   color:"#763857";
+}
+.mySwiper{
+   height:200px
+}
+.cards-h{
+   box-shadow: 0 20px 20px #CDF0EA,  0px 0px 20px #CDF0EA;
+   margin: "20px -30px 0 60px";
+    border-radius: '10%';
+     width: '5rem';
+      height: '8rem';
+   background-color: '#aeefec';
+    border: none;
+}
