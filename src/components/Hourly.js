@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
-import axios from 'axios'
+
 import Charthour from './Charthour';
 import img from "./images/cloudy-day-1.svg";
 import SwiperCore, {
@@ -16,7 +16,6 @@ import SwiperCore, {
 } from 'swiper/core';
 import cloudyd from "./images/cloudy-day-2.svg";
 import cloudyn from "./images/cloudy-night-3.svg";
-import cloudy from "./images/cloudy.svg"
 import sun from './images/day.svg'
 import moon from './images/night.svg'
 import thunder from './images/thunder.svg'
@@ -29,15 +28,17 @@ import rain from './images/rainy-4.svg'
 import { WiDayFog } from "react-icons/wi";
 import { WiNightFog } from "react-icons/wi";
 SwiperCore.use([Navigation]);
+require("dotenv").config()
 
 const Hourly = ({ value, trigger, search }) => {
 
 
   const [hourdata, setHourdata] = useState([]);
   const [name, setName] = useState([]);
+
   useEffect(() => {
     const fetchApi = async () => {
-      const url = `https://api.weatherbit.io/v2.0/forecast/hourly?city=${search}&key=9152375a32484786a83e086eb0b4a4d2&hours=24`
+      const url = `https://api.weatherbit.io/v2.0/forecast/hourly?city=${search}&key=${process.env.REACT_APP_INFO_KEY}&hours=24`
       const response = await fetch(url);
       const res = await response.json();
 

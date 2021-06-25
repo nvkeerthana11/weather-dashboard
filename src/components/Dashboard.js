@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Hourly from './Hourly';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FormControl from '@material-ui/core/FormControl';
@@ -10,12 +10,11 @@ import axios from 'axios'
 import { TiDeleteOutline } from "react-icons/ti";
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 import './Dashboard.css'
 import './Info.css'
+require('dotenv').config()
 
 const Dashboard = ({ search, setSearch }) => {
   const [buttonPopup, setbuttonPopup] = useState(false);
@@ -25,10 +24,10 @@ const Dashboard = ({ search, setSearch }) => {
   const [items, setItems] = useState([])
   const [city, setCity] = useState('');
 
-
+  let key = process.env.REACT_APP_IMAGES_API_KEY
 
   axios
-    .get(`https://api.unsplash.com/search/photos?query=${search}&client_id=IOTOlanQknRvAqEQmNFq_GEBa2C-FiBVnFMgYd1sWVM`)
+    .get(`https://api.unsplash.com/search/photos?query=${search}&client_id=${key}`)
     .then(res => {
 
       setImage(res.data.results[0].urls.small)
@@ -90,8 +89,7 @@ const Dashboard = ({ search, setSearch }) => {
           <h6>Add City</h6>
 
         </button>
-        {/* <img className="imgs" src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzY5MTR8MHwxfHNlYXJjaHwxfHxDaGVubmFpfGVufDB8fHx8MTYyNDAyMDk0Mg&ixlib=rb-1.2.1&q=80&w=400" alt="" /> */}
-        {/* <h5 className="imgtag">{image.search}</h5>  */}
+
         {items.map((image, key) => (
 
           <div className="column">
@@ -115,8 +113,8 @@ const Dashboard = ({ search, setSearch }) => {
           aria-label="disabled tabs example"
         >
           <Tab label="weekly" onClick={() => setbuttonPopup(false)} />
-
           <Tab label="Hourly" onClick={() => setbuttonPopup(true)} />
+
         </Tabs>
         <FormControl component="fieldset">
 

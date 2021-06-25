@@ -24,18 +24,16 @@ import rain from './images/rainy-4.svg'
 import { WiDayFog } from "react-icons/wi";
 import { WiNightFog } from "react-icons/wi";
 import img from "./images/cloudy-day-1.svg";
-import Dashboard from './Dashboard';
-import SwiperCore, {
-  Navigation
-} from 'swiper/core';
-const Hour = ({ search, value, pod }) => {
+require('dotenv').config()
 
+const Hour = ({ search, value, pod }) => {
+  console.log(process.env)
   const [weather, setWeather] = useState([]);
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
   useEffect(() => {
     const fetchApi = async () => {
-      const url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${search}&key=9152375a32484786a83e086eb0b4a4d2&days=7`
+      const url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${search}&key=${process.env.REACT_APP_INFO_KEY}&days=7`
       const response = await fetch(url);
       const res = await response.json();
       setWeather(res.data)

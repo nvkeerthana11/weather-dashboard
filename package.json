@@ -18,6 +18,7 @@
     "bootstrap": "^5.0.0",
     "chart.js": "^2.9.4",
     "deck.gl": "^8.4.17",
+    "dotenv": "^8.2.0",
     "mapbox-gl": "^2.3.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",

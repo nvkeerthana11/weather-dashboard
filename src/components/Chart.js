@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2';
 import './Chart.css'
 import axios from 'axios'
-
+require('dotenv').config()
 
 const Chart = ({ search }) => {
 
@@ -14,7 +14,7 @@ const Chart = ({ search }) => {
         let temp = [];
 
         axios
-            .get(`https://api.weatherbit.io/v2.0/forecast/daily?city=${search}&key=9152375a32484786a83e086eb0b4a4d2&days=7`)
+            .get(`https://api.weatherbit.io/v2.0/forecast/daily?city=${search}&key=${process.env.REACT_APP_INFO_KEY}&days=7`)
             .then(res => {
 
                 for (const data of res.data.data) {

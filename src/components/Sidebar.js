@@ -28,7 +28,7 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import InputBase from '@material-ui/core/InputBase';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Info from './Info'
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
 
@@ -176,7 +176,7 @@ const Sidebar = (props) => {
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [citynames, setcityName] = useState([]);
+
 
   const handleDrawerOpen = () => {
     setOpen(true);

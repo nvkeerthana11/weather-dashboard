@@ -14,15 +14,16 @@ import rainy from './images/rainy-6.svg'
 import rain from './images/rainy-4.svg';
 import Details from './Details'
 import Parameters from './Parameters'
+require("dotenv").config()
 
 const Info = ({ search, trigger, image, cityName }) => {
     const [city, setData] = useState(null);
 
-    console.log(search);
+    let key = process.env.REACT_APP_INFO_KEY
 
     useEffect(() => {
         const fetchApi = async () => {
-            const url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${search}&key=9152375a32484786a83e086eb0b4a4d2`;
+            const url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${search}&key=${key}`;
             const response = await fetch(url);
             const res = await response.json();
             if (res.data) {
@@ -60,7 +61,7 @@ const Info = ({ search, trigger, image, cityName }) => {
     var visibility = " ";
     var clouds = " ";
     var pressure = " ";
-    var pod = " ";
+
     if (city) {
         sunrise = new Date(city.sunrise_ts * 1000).toLocaleTimeString(undefined, {
             minute: "numeric",
@@ -85,7 +86,7 @@ const Info = ({ search, trigger, image, cityName }) => {
         humidity = city.rh.toFixed(0);
         clouds = city.clouds.toFixed(0);
         pressure = city.pres.toFixed(0);
-        pod = city.pod
+
     } else {
         desc = "no data";
     }

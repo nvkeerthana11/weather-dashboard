@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import './Chart.css'
 import axios from 'axios'
+require('dotenv').config()
 
 const Charthour = ({ trigger, setTrigger, search }) => {
 
@@ -11,7 +12,7 @@ const Charthour = ({ trigger, setTrigger, search }) => {
         let time = [];
         let temp = [];
         axios
-            .get(`https://api.weatherbit.io/v2.0/forecast/hourly?city=${search}&key=9152375a32484786a83e086eb0b4a4d2&hours=48`)
+            .get(`https://api.weatherbit.io/v2.0/forecast/hourly?city=${search}&key=${process.env.REACT_APP_INFO_KEY}&hours=48`)
             .then(res => {
 
 
@@ -31,12 +32,17 @@ const Charthour = ({ trigger, setTrigger, search }) => {
                     datasets: [
 
                         {
-                            label: "temperature",
+                            label: "Temperature",
                             data: temp,
-                            fill: 'false',
-                            backgroundColor: "#a4ebf3",
-                            borderColor: "#046582",
-                            borderWidth: 4
+                            borderColor: "#FF577F",
+                            backgroundColor: "#FFDCDC",
+                            fillColor: "#fff",
+                            strokeColor: "#ffb88c",
+                            pointColor: "#fff",
+                            pointStrokeColor: "#ffb88c",
+                            pointHighlightFill: "#ffb88c",
+                            pointHighlightStroke: "#fff",
+                            borderWidth: 3
 
                         }
                     ]
