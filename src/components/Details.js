@@ -7,13 +7,10 @@ import { WiMoonset } from "react-icons/wi";
 import { WiMoonrise } from "react-icons/wi";
 import 'react-circular-progressbar/dist/styles.css';
 import { WiSunset } from "react-icons/wi";
-import VisibilitySensor from "react-visibility-sensor";
 import { WiSunrise } from "react-icons/wi";
 import { RiWindyFill } from "react-icons/ri";
 import Card from "react-bootstrap/Card";
 import sun from './images/day.svg'
-import { render } from 'react-dom';
-import Compass from 'react-coord-compass';
 import GaugeChart from 'react-gauge-chart'
 import "bootstrap/dist/css/bootstrap.min.css";
 

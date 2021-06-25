@@ -37,9 +37,6 @@ const Dashboard = ({ search, setSearch }) => {
     });
 
 
-  const handleClick = () => {
-    setbuttonPopup(true);
-  }
 
 
   const handleChange = (event) => {

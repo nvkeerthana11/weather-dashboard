@@ -48,8 +48,7 @@ const Hourly = ({ value, trigger, search }) => {
     fetchApi();
   }, [])
 
-  var sunrise = ' '
-  var sunset = ' '
+
   var pod = " "
   const time = new Date().getHours()
 
@@ -58,8 +57,7 @@ const Hourly = ({ value, trigger, search }) => {
     hourdata.map((hour) => (
 
       desc = hour.weather.code,
-      sunrise = new Date(hourdata.sunrise_ts * 1000).getHours(),
-      sunset = new Date(hourdata.sunset_ts * 1000).getHours(),
+
       pod = hour.pod
     ))
   } else {

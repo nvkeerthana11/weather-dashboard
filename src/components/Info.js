@@ -30,7 +30,7 @@ const Info = ({ search, trigger, image, cityName }) => {
                 setData(res.data[0]);
             }
             else {
-                var data = " ";
+                var data = 'no';
             }
 
         };

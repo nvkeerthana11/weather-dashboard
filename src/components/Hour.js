@@ -43,18 +43,16 @@ const Hour = ({ search, value, pod }) => {
     fetchApi();
   }, [])
 
-  var sunrise = ' '
-  var sunset = ' '
-  var pod = pod
+
+  var pod = pod;
   const time = new Date().getHours()
 
   var desc = " ";
   if (weather) {
     weather.map((hour) => (
 
-      desc = hour.weather.code,
-      sunrise = new Date(weather.sunrise_ts * 1000).getHours(),
-      sunset = new Date(weather.sunset_ts * 1000).getHours()
+      desc = hour.weather.code
+
     ))
   } else {
     desc = "no data";
