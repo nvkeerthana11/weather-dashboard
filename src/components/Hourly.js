@@ -34,19 +34,17 @@ const Hourly = ({ value, trigger, search }) => {
 
 
   const [hourdata, setHourdata] = useState([]);
-  const [name, setName] = useState([]);
+
 
   useEffect(() => {
     const fetchApi = async () => {
       const url = `https://api.weatherbit.io/v2.0/forecast/hourly?city=${search}&key=${process.env.REACT_APP_INFO_KEY}&hours=24`
       const response = await fetch(url);
       const res = await response.json();
-
       setHourdata(res.data)
-      setName(res)
     }
     fetchApi();
-  }, [])
+  }, [search])
 
 
   var pod = " "
@@ -146,7 +144,7 @@ const Hourly = ({ value, trigger, search }) => {
                   <SwiperSlide>
                     <Card style={{ margin: "20px 20px 50px 80px", borderLeft: "-600px", borderRadius: '10%', width: '5rem', height: '8rem', backgroundColor: "#f1c6e7", boxShadow: "0 20px 20px #e1ccec,  0px 0px 20px #e1ccec", border: 'none' }} >
 
-                      {/* <img src={`https://www.weatherbit.io/static/img/icons/${hour.weather.icon}.png`} alt="" /> */}
+
                       <img src={icon} alt="" />
                       <h6 style={{ margin: '-5px 0 10px 10px', color: "#763857", fontWeight: "bolder" }}>{new Date(hour.ts * 1000).toLocaleTimeString(undefined, {
                         minute: "numeric", hour: "numeric"
@@ -154,7 +152,7 @@ const Hourly = ({ value, trigger, search }) => {
                       {value === 'Celsius' ?
                         <h6 style={{ textAlign: 'center', marginTop: "-7px", color: "#763857", fontWeight: "bolder" }}>{hour.temp.toFixed(0)}&deg;C</h6> :
                         <h6 style={{ textAlign: 'center', marginTop: "-7px", color: "#763857", fontWeight: "bolder" }}>{(hour.temp * 1.8 + 32).toFixed(0)}&deg;F</h6>}
-                      {/* <h6 style={{ textAlign: 'center', marginTop: "-4px", padding: "0 3% 3% 3%" }}>{hour.weather.description}</h6> */}
+
                     </Card>
                   </SwiperSlide>
                 ))}

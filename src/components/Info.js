@@ -215,7 +215,7 @@ const Info = ({ search, trigger, image, cityName }) => {
                                     <h4 style={{ display: "inline" }}>&deg;C</h4>
                                 </h3>
                                 <div className="vl"></div>
-                                <h5 style={{ position: "absolute", color: "#ff7a00" }}>
+                                <h5 style={{ position: "absolute", color: "#ff7a00", width: "200px" }}>
                                     {city.weather.description}
                                 </h5>
                             </div>

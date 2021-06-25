@@ -12,7 +12,7 @@ const Charthour = ({ trigger, setTrigger, search }) => {
         let time = [];
         let temp = [];
         axios
-            .get(`https://api.weatherbit.io/v2.0/forecast/hourly?city=${search}&key=${process.env.REACT_APP_INFO_KEY}&hours=48`)
+            .get(`https://api.weatherbit.io/v2.0/forecast/hourly?city=${search}&key=${process.env.REACT_APP_INFO_KEY}&hours=24`)
             .then(res => {
 
 
