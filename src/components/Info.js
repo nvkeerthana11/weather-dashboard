@@ -90,7 +90,7 @@ const Info = ({ search, trigger, image, cityName }) => {
     } else {
         desc = "no data";
     }
-    console.log(time)
+    console.log(city.weather.code)
 
     var icon = "";
 
@@ -151,7 +151,7 @@ const Info = ({ search, trigger, image, cityName }) => {
             }
             break;
 
-        case 300 || 500:
+        case desc === 300 || desc === 500:
             icon = rain;
             break;
 
