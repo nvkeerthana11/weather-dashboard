@@ -311,7 +311,7 @@ const Sidebar = (props) => {
             <Switch>
 
               <Route exact from="/" render={props => <Dashboard search={search} setSearch={setSearch} {...props} />} />
-
+              <Route exact from="/main" render={props => <Dashboard search={search} setSearch={setSearch} {...props} />} />
 
             </Switch>
 
