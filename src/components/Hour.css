@@ -36,12 +36,20 @@
 .mySwiper{
    height:200px
 }
-.cards-h{
-   box-shadow: 0 20px 20px #CDF0EA,  0px 0px 20px #CDF0EA;
-   margin: "20px -30px 0 60px";
-    border-radius: '10%';
-     width: '5rem';
-      height: '8rem';
-   background-color: '#aeefec';
-    border: none;
+
+.imgs-container{
+  margin-left:100px;
+  position:absolute;
 }
+.column {
+   float: left;
+   width: 10%;
+   padding: 5px;
+ }
+ 
+ /* Clear floats after image containers */
+ .row::after {
+   content: "";
+   clear: both;
+   display: table;
+ }

@@ -9,9 +9,8 @@ import "swiper/components/pagination/pagination.min.css"
 import "swiper/components/navigation/navigation.min.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Chart from './Chart';
-import cloudyd from "./images/cloudy-day-2.svg";
+import cloudyd from "./images/cloudy-day-3.svg";
 import cloudyn from "./images/cloudy-night-3.svg";
-import cloudy from "./images/cloudy.svg"
 import sun from './images/day.svg'
 import moon from './images/night.svg'
 import thunder from './images/thunder.svg'
@@ -23,13 +22,13 @@ import rainy from './images/rainy-6.svg'
 import rain from './images/rainy-4.svg'
 import { WiDayFog } from "react-icons/wi";
 import { WiNightFog } from "react-icons/wi";
-import img from "./images/cloudy-day-1.svg";
+
 require('dotenv').config()
 
 const Hour = ({ search, value, pod }) => {
-  console.log(process.env)
+
   const [weather, setWeather] = useState([]);
-  // const [show, setShow] = useState(false);
+
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -38,91 +37,96 @@ const Hour = ({ search, value, pod }) => {
       const res = await response.json();
       setWeather(res.data)
 
-
     }
     fetchApi();
-  }, [])
+  }, [search])
 
 
-  var pod = pod;
-  const time = new Date().getHours()
 
-  var desc = " ";
+
+  var temps = []
+  var array = []
+  var icons = []
+  var dates = []
+
+
   if (weather) {
     weather.map((hour) => (
-
-      desc = hour.weather.code
-
+      temps.push(hour.temp),
+      array.push(hour.weather.code),
+      dates.push(new Date(hour.ts * 1000).toLocaleString(undefined, {
+        month: "long", day: "numeric"
+      }))
     ))
-  } else {
-    desc = "no data";
   }
 
-  var icon = "";
-
-  switch (true) {
-    case desc >= 801 && desc <= 804:
-
+  var pod = pod;
+  console.log(pod)
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] >= 801 && array[i] <= 804) {
       if (pod === 'd') {
-        icon = cloudyd;
+        icons.push(cloudyd)
+
+      } else {
+        icons.push(cloudyn)
+
+      }
+    } else if (array[i] >= 200 && array[i] <= 233) {
+
+      icons.push(thunder)
+    } else if (array[i] === 800) {
+      if (pod === 'd') {
+        icons.push(sun)
+
+      } else {
+        icons.push(moon)
+
+      }
+    } else if (array[i] >= 501 && array[i] <= 522) {
+      if (pod === 'd') {
+        icons.push(rainyd);
+
       }
       else {
-        icon = cloudyn
+        icons.push(rainy);
+
       }
-      break;
-    case desc === 800:
+    } else if (array[i] === 600) {
       if (pod === 'd') {
-        icon = sun;
+        icons.push(snowyd);
+
       }
       else {
-        icon = moon;
+        icons.push(snowy);
+
       }
-      break;
-    case desc >= 200 && desc <= 233:
-
-      icon = thunder;
-      break;
-
-    case desc === 600:
+    } else if (array[i] >= 700 && array[i] <= 751) {
       if (pod === 'd') {
-        icon = snowyd;
+        icons.push(<WiDayFog />);
+
       }
       else {
-        icon = snowy;
+        icons.push(<WiNightFog />);
+
       }
-      break;
+    } else if (array[i] >= 601 && array[i] <= 623) {
+      icons.push(snowrain)
 
-    case desc >= 601 && desc <= 623:
-      icon = snowrain;
-      break;
+    } else if (array[i] === 300 || array[i] === 500) {
+      icons.push(rain)
 
-    case desc >= 501 && desc <= 522:
-      if (pod === 'd') {
-        icon = rainyd;
-      }
-      else {
-        icon = rainy;
-      }
-      break;
-
-    case 300 || 500:
-      icon = rain;
-      break;
-
-    case desc >= 700 && desc <= 751:
-      if (pod === 'd') {
-        icon = <WiDayFog />;
-      }
-      else {
-        icon = <WiNightFog />
-      }
-
-      break;
-
-
-    default:
-      break;
+    }
   }
+
+  var iconset = icons;
+  var val = temps;
+  var week = dates;
+
+  var dataMap = val.map((v, i) =>
+    ({ "icon": iconset[i], "temp": v, "date": week[i] })
+  )
+
+
 
 
 
@@ -133,35 +137,41 @@ const Hour = ({ search, value, pod }) => {
           <Container>
             <Swiper slidesPerView={8}
               className="mySwiper">
+
               <CardGroup style={{ marginTop: '30px' }}>
 
-                {weather.map((d) => (
+                {dataMap.map((data) => (
                   <SwiperSlide>
-                    <Card className="cards-h" style={{ margin: "20px -30px 0 60px", borderRadius: '10%', width: '5rem', height: '8rem', backgroundColor: '#aeefec', border: 'none' }}>
 
-                      {/* <img src={`https://www.weatherbit.io/static/img/icons/${d.weather.icon}.png`} alt="" /> */}
-                      <img src={icon} alt=" " />
-                      <h6 style={{ textAlign: 'center', margin: '-11px 0 10px 0' }}>{new Date(d.ts * 1000).toLocaleString(undefined, {
-                        month: "long", day: "numeric"
-                      })}</h6>
+                    <Card style={{ margin: "20px 0px 0 70px", borderRadius: '10%', width: '5rem', height: '8rem', backgroundColor: '#aeefec', border: 'none', display: 'inline-block' }}>
+                      <img style={{ width: "100px", height: "100px", margin: "-10px 0 0 -10px" }} src={data.icon} alt="" />
+                      <h6 style={{ textAlign: 'center', margin: '-11px 0 10px 0' }}>{
+                        data.date
+                      }</h6>
 
                       {value === 'Celsius' ?
-                        <h6 style={{ textAlign: 'center', marginTop: "-7px" }}>{d.temp.toFixed(0)}&deg;C</h6> :
+                        <h6 style={{ textAlign: 'center', marginTop: "-7px" }}>{data.temp.toFixed(0)}&deg;C</h6> :
 
-                        <h6 style={{ textAlign: 'center', marginTop: "-7px" }}>{(d.temp * 1.8 + 32).toFixed(0)}&deg;F</h6>
+                        <h6 style={{ textAlign: 'center', marginTop: "-7px" }}>{(data.temp * 1.8 + 32).toFixed(0)}&deg;F</h6>
                       }
+
                     </Card>
+
                   </SwiperSlide>
+
                 ))}
+
+
+
               </CardGroup>
             </Swiper>
+
           </Container>
 
           <Chart search={search}
             value={value}
           />
         </div>
-
       </div>
 
     </React.Fragment>

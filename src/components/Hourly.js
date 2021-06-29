@@ -48,85 +48,88 @@ const Hourly = ({ value, trigger, search }) => {
 
 
   var pod = " "
-  const time = new Date().getHours()
+  var temps = [];
+  var array = [];
+  var hours = [];
 
-  var desc = " ";
+  var icons = [];
   if (hourdata) {
     hourdata.map((hour) => (
-
-      desc = hour.weather.code,
-
-      pod = hour.pod
+      temps.push(hour.temp),
+      array.push(hour.weather.code),
+      pod = hour.pod,
+      hours.push(new Date(hour.ts * 1000).toLocaleTimeString(undefined, {
+        minute: "numeric", hour: "numeric"
+      }))
     ))
-  } else {
-    desc = "no data";
   }
 
-  var icon = "";
-  console.log(pod)
-  switch (true) {
-    case desc >= 801 && desc <= 804:
 
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] >= 801 && array[i] <= 804) {
       if (pod === 'd') {
-        icon = cloudyd;
+        icons.push(cloudyd)
+
+      } else {
+        icons.push(cloudyn)
+
+      }
+    } else if (array[i] >= 200 && array[i] <= 233) {
+
+      icons.push(thunder)
+    } else if (array[i] === 800) {
+      if (pod === 'd') {
+        icons.push(sun)
+
+      } else {
+        icons.push(moon)
+
+      }
+    } else if (array[i] >= 501 && array[i] <= 522) {
+      if (pod === 'd') {
+        icons.push(rainyd);
+
       }
       else {
-        icon = cloudyn
+        icons.push(rainy);
+
       }
-      break;
-    case desc === 800:
+    } else if (array[i] === 600) {
       if (pod === 'd') {
-        icon = sun;
+        icons.push(snowyd);
+
       }
       else {
-        icon = moon;
+        icons.push(snowy);
+
       }
-      break;
-    case desc >= 200 && desc <= 233:
-
-      icon = thunder;
-      break;
-
-    case desc === 600:
+    } else if (array[i] >= 700 && array[i] <= 751) {
       if (pod === 'd') {
-        icon = snowyd;
+        icons.push(<WiDayFog />);
+
       }
       else {
-        icon = snowy;
+        icons.push(<WiNightFog />);
+
       }
-      break;
+    } else if (array[i] >= 601 && array[i] <= 623) {
+      icons.push(snowrain)
 
-    case desc >= 601 && desc <= 623:
-      icon = snowrain;
-      break;
+    } else if (array[i] === 300 || array[i] === 500) {
+      icons.push(rain)
 
-    case desc >= 501 && desc <= 522:
-      if (pod === 'd') {
-        icon = rainyd;
-      }
-      else {
-        icon = rainy;
-      }
-      break;
-
-    case 300 || 500:
-      icon = rain;
-      break;
-
-    case desc >= 700 && desc <= 751:
-      if (pod === 'd') {
-        icon = <WiDayFog />;
-      }
-      else {
-        icon = <WiNightFog />
-      }
-
-      break;
-
-
-    default:
-      break;
+    }
   }
+
+  var iconset = icons;
+  var val = temps;
+  var week = hours;
+  //Using map()
+
+  var dataMap = val.map((v, i) =>
+    ({ "icon": iconset[i], "temp": v, "hour": week[i] })
+  )
+
 
 
   return trigger ? (
@@ -140,15 +143,14 @@ const Hourly = ({ value, trigger, search }) => {
               className="mySwiper">
               <CardGroup style={{ margin: '30px 0 20px 0' }}>
 
-                {hourdata.map((hour) => (
+                {dataMap.map((hour) => (
                   <SwiperSlide>
                     <Card style={{ margin: "20px 20px 50px 80px", borderLeft: "-600px", borderRadius: '10%', width: '5rem', height: '8rem', backgroundColor: "#f1c6e7", boxShadow: "0 20px 20px #e1ccec,  0px 0px 20px #e1ccec", border: 'none' }} >
 
 
-                      <img src={icon} alt="" />
-                      <h6 style={{ margin: '-5px 0 10px 10px', color: "#763857", fontWeight: "bolder" }}>{new Date(hour.ts * 1000).toLocaleTimeString(undefined, {
-                        minute: "numeric", hour: "numeric"
-                      })}</h6>
+                      <img style={{ width: "100px", height: "100px", margin: "-10px 0 0 -10px" }} src={hour.icon} alt="" />
+                      <h6 style={{ margin: '-5px 0 10px 10px', color: "#763857", fontWeight: "bolder" }}>{hour.hour}</h6>
+
                       {value === 'Celsius' ?
                         <h6 style={{ textAlign: 'center', marginTop: "-7px", color: "#763857", fontWeight: "bolder" }}>{hour.temp.toFixed(0)}&deg;C</h6> :
                         <h6 style={{ textAlign: 'center', marginTop: "-7px", color: "#763857", fontWeight: "bolder" }}>{(hour.temp * 1.8 + 32).toFixed(0)}&deg;F</h6>}
