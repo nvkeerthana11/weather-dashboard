@@ -8,6 +8,37 @@ They can also view the forecast for many countries/cities at a time. Click the a
 You can switch between the countries to view the current weather forecast and other parameters such as temperature,humidity,windspeed.
 
 
+## **Technologies Used**
+
+### **Languages used**
+
+- HTML5
+- CSS
+- REACT JS
+
+### **Frameworks, Libraries & Api's Used**
+
+- Material UI
+- Weatherbit api for - Current Weather Data
+- Weatherbit api for - 16 day forecast
+- Weatherbit api for - 24 hour forecast
+- Animated Weather icons
+- React icons
+- Swiper JS for responsive carousel
+- React-Bootstrap
+- React Chart.js for graphs
+- React-circular-progressbar
+- Unsplash Images api
+
+Website link:https://romantic-lewin-b31fe1.netlify.app
+
+
+
+
+
+ 
+
+
  
 
 
